@@ -1,0 +1,10 @@
+SELECT
+	date, meantemperaturef
+FROM
+	weather
+WHERE 
+	meantemperaturef = (
+	SELECT 
+		MAX(meantemperaturef) 
+	FROM
+		weather)

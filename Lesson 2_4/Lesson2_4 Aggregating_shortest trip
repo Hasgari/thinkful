@@ -1,0 +1,9 @@
+SELECT
+	*
+FROM
+	trips
+WHERE duration = (
+	SELECT 
+		MIN(duration) 
+	FROM 
+		trips)
