@@ -1,0 +1,20 @@
+WITH merged_file AS
+	(SELECT 
+		*
+	FROM
+		trips
+LEFT JOIN
+	weather
+ON
+	SUBSTRING(trips.start_date,1,10) = weather.date)
+SELECT
+	date,
+	MAX(duration)
+FROM
+	merged_file
+WHERE events = 'Rain'
+GROUP BY 
+	date
+ORDER BY 
+	date
+

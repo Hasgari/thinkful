@@ -1,0 +1,24 @@
+WITH merged_file AS
+(SELECT
+	stations.station_id,
+	COUNT(stations.station_id) AS frequency
+FROM 
+	stations
+JOIN
+	status
+on 
+	stations.station_id = status.station_id
+WHERE status.docks_available = 0
+GROUP BY stations.station_id)
+SELECT
+	*
+FROM 
+	merged_file
+WHERE
+	frequency = (
+	SELECT 
+		MAX(frequency)
+	FROM
+		merged_file)
+
+

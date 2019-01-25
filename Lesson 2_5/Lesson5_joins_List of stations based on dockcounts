@@ -1,0 +1,21 @@
+WITH agg_list AS
+(SELECT
+		start_station,
+		COUNT(start_station) trip_count
+	FROM
+		trips
+	GROUP BY start_station)
+SELECT 
+	station_id,
+	name,
+	trip_count,
+	dockcount
+FROM 
+	stations
+JOIN
+	agg_list
+ON 
+	stations.name = agg_list.start_station
+ORDER BY
+stations.dockcount
+DESC

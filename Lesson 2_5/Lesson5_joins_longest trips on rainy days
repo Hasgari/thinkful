@@ -1,0 +1,20 @@
+WITH merged_file AS 
+(SELECT
+	*
+FROM
+	trips
+LEFT JOIN
+	weather
+ON
+	substring(trips.start_date,1,10) = weather.date)
+SELECT 
+	*
+From 
+	merged_file
+WHERE
+	events = 'Rain'
+ORDER BY 
+	duration
+DESC
+
+
